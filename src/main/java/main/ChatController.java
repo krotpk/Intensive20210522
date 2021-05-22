@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -32,10 +33,14 @@ public class ChatController {
     }
 
     @GetMapping(path="/api/users")
-    public HashMap<String,Boolean> listUsers(){
-        HashMap<String, Boolean> response = new HashMap<>();
-
-        return response;
+    public ArrayList listUsers(){
+        ArrayList<User> userList = new ArrayList<>();
+        Iterable<User> response = new ArrayList<>();
+        response = userRepository.findAll();
+        for(User i: response){
+            
+        }
+        return userList;
     }
 
     @PostMapping(path = "/api/users")
@@ -55,4 +60,7 @@ public class ChatController {
     private String getSessionId() {
         return RequestContextHolder.currentRequestAttributes().getSessionId();
     }
+
+
+
 }
